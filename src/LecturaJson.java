@@ -1,4 +1,4 @@
-public class LecturaJason {
+public class LecturaJson {
 
 }
 
