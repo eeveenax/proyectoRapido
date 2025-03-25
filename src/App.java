@@ -144,11 +144,3 @@ public class App {
         sc.close();
     }
 }
-
-/*
- * 
- * o Conversión a: Finalmente, exportará la
- * información contenida en las estructuras de datos mencionadas en el apartado
- * anterior en el formato seleccionado. Esta opción solo se permitirá tras haber
- * seleccionado un fichero.
- */
