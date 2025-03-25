@@ -1,4 +1,5 @@
 import java.io.File;
+import java.security.KeyStore.Entry;
 import java.util.*;
 
 /**
@@ -92,9 +93,16 @@ public class App {
                     String extensionSalida = sc.nextLine().toLowerCase();
                     System.out.println("Introduce el nombre del fichero");
                     String nombreFicheroSalida = sc.nextLine();
-                    File ficheroSalida = carpetaFichero
-                            .crearFichero(
-                                    new File(carpeta.getPath() + "\\" + nombreFicheroSalida + "." + extensionSalida));
+                    File ficheroSalida = null;
+
+                    if (carpetaFichero.comprobarExtension(extensionSalida)) {
+                        ficheroSalida = carpetaFichero
+                                .crearFichero(
+                                        new File(carpeta.getPath() + "\\" + nombreFicheroSalida + "."
+                                                + extensionSalida));
+                    } else {
+                        System.out.println("Este tipo de ficheros no existe");
+                    }
 
                     switch (extensionSalida) {
                         case "csv":
@@ -103,11 +111,14 @@ public class App {
                         case "json":
                             ficheroJson.convertirAJson(contenidoFichero, ficheroSalida);
                             break;
-                        case "xml":
-
-                            break;
 
                         default:
+                            System.out.println("Introduce el nodo padre ");
+                            String nodopadre = sc.nextLine();
+                            System.out.println("Introduce el nodo hijo ");
+                            String nodoHijo = sc.nextLine();
+                            ficheroXml.escribirxml(contenidoFichero, nodopadre, nodoHijo,
+                                    ficheroSalida);
                             break;
                     }
 

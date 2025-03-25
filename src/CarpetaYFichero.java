@@ -40,4 +40,9 @@ public class CarpetaYFichero {
         return ficheroCrear;
 
     }
+
+    public boolean comprobarExtension(String extension) {
+
+        return (extension.equals("json") || extension.equals("xml") || extension.equals("csv"));
+    }
 }

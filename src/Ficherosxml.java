@@ -1,8 +1,11 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.Map.Entry;
 
 public class Ficherosxml {
 
@@ -13,8 +16,7 @@ public class Ficherosxml {
 
         try (BufferedReader br = new BufferedReader(new FileReader(fichero))) {
             String linea;
-            String nodoInicio = null;
-            String nodoFin = null;
+            String nodoHijo = "";
             boolean segundaLinea = true;
             boolean leyendoBloque = false;
 
@@ -24,18 +26,16 @@ public class Ficherosxml {
             while ((linea = br.readLine()) != null) {
 
                 if (segundaLinea) {
-                    nodoInicio = linea.trim();
-                    nodoFin = "</" + nodoInicio.substring(1, nodoInicio.length() - 1) + ">";
-
+                    nodoHijo = linea.substring(1, linea.indexOf(">"));
                     segundaLinea = false;
                 }
 
-                if (linea.contains(nodoInicio)) {
+                if (linea.contains("<" + nodoHijo + ">")) {
                     mapa = new LinkedHashMap<>();
                     leyendoBloque = true;
                 }
 
-                else if (linea.contains(nodoFin)) {
+                else if (linea.contains("</" + nodoHijo + ">")) {
                     if (mapa != null) {
                         contenidoxml.add(mapa);
                     }
@@ -60,15 +60,31 @@ public class Ficherosxml {
             e.printStackTrace();
         }
 
-        /*
-         * for (LinkedHashMap<String, String> map : contenidoxml) {
-         * for (Map.Entry<String, String> entry : map.entrySet()) {
-         * System.out.println(entry.getKey() + ": " + entry.getValue());
-         * }
-         * System.out.println(" ");
-         * }
-         */
-
         return contenidoxml;
     }
+
+    public void escribirxml(ArrayList<LinkedHashMap<String, String>> contenidoXml, String nombreNodoPadre,
+            String nodoHijo, File ficherosalida) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(ficherosalida))) {
+
+            bw.write("<" + nombreNodoPadre + ">\n");
+
+            for (LinkedHashMap<String, String> elementos : contenidoXml) {
+
+                bw.write("<" + nodoHijo + ">\n");
+
+                for (Entry<String, String> entrada : elementos.entrySet()) {
+                    bw.write("<" + entrada.getKey() + ">" + entrada.getValue() + "</" + entrada.getKey() + ">\n");
+                }
+
+                bw.write("</" + nodoHijo + ">\n");
+            }
+
+            bw.write("</" + nombreNodoPadre + ">\n");
+
+        } catch (IOException e) {
+            System.err.println("Error al escribir " + e.getMessage());
+        }
+    }
+
 }
