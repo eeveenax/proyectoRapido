@@ -1,6 +1,7 @@
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 /**
@@ -13,9 +14,9 @@ public class App {
         Scanner sc = new Scanner(System.in);
         boolean seguir = true;
         SeleccionCarpeta seleccionCarpeta = new SeleccionCarpeta();
-        LecturaJson lecturaJson = new LecturaJson();
+        FicherosJson lecturaJson = new FicherosJson();
         File carpeta = null;
-        ArrayList<HashMap<String, String>> contenidoFichero = new ArrayList<>();
+        ArrayList<LinkedHashMap<String, String>> contenidoFichero = new ArrayList<>();
         while (seguir) {
 
             System.out.println("Introduce una opción:" + "\n1.Seleccionar Carpeta" + "\n2.Lectura de Fichero"
