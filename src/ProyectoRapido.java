@@ -6,7 +6,7 @@ import java.util.*;
  * @author Maria Ceballos Mesías
  */
 
-public class App {
+public class ProyectoRapido {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         boolean seguir = true;
