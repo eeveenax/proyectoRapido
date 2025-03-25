@@ -1,8 +1,5 @@
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * @author Evelia Gil Paredes
@@ -14,7 +11,9 @@ public class App {
         Scanner sc = new Scanner(System.in);
         boolean seguir = true;
         SeleccionCarpeta seleccionCarpeta = new SeleccionCarpeta();
-        FicherosJson lecturaJson = new FicherosJson();
+        FicherosJson ficheroJson = new FicherosJson();
+        Ficherosxml ficheroXml = new Ficherosxml();
+
         File carpeta = null;
         ArrayList<LinkedHashMap<String, String>> contenidoFichero = new ArrayList<>();
         while (seguir) {
@@ -62,10 +61,18 @@ public class App {
 
                             case "json":
 
-                                contenidoFichero = lecturaJson.leerJson(ficheroSeleccionado);
+                                contenidoFichero = ficheroJson.leerJson(ficheroSeleccionado);
                                 break;
 
                             case "xml":
+                                try {
+
+                                    contenidoFichero = ficheroXml.leerxml(ficheroSeleccionado);
+
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
+
                                 break;
 
                             default:
