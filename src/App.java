@@ -14,11 +14,10 @@ public class App {
         FicherosJson ficheroJson = new FicherosJson();
         Ficherosxml ficheroXml = new Ficherosxml();
         FicherosCSV ficheroCSV = new FicherosCSV();
-
         File carpeta = null;
+
         ArrayList<LinkedHashMap<String, String>> contenidoFichero = new ArrayList<>();
         while (seguir) {
-
             System.out.println("Introduce una opción:" + "\n1.Seleccionar Carpeta" + "\n2.Lectura de Fichero"
                     + "\n3.Conversión Fichero" + "\nCualquier otra opción te sacará del programa");
             int opcion = Integer.parseInt(sc.nextLine());
@@ -47,48 +46,48 @@ public class App {
 
                     if (carpeta == null) {
                         System.out.println("Introduzca una ruta de carpeta válida, opción 1");
-                        return;
-
-                    }
-
-                    File ficheroSeleccionado = new File(carpeta.getPath() + "\\" + nombrefichero);
-                    if (ficheroSeleccionado.isFile()) {
-                        System.out
-                                .println("El fichero seleccionado es " + nombrefichero + "\nSu extensión es "
-                                        + extension);
-                        switch (extension) {
-                            case "csv":
-
-                                try {
-                                    contenidoFichero = ficheroCSV.leerCSV(ficheroSeleccionado);
-                                } catch (Exception e) {
-                                    System.out.println(e.getMessage());
-                                }
-                                break;
-
-                            case "json":
-                                contenidoFichero = ficheroJson.leerJson(ficheroSeleccionado);
-                                break;
-
-                            case "xml":
-                                try {
-
-                                    contenidoFichero = ficheroXml.leerxml(ficheroSeleccionado);
-
-                                } catch (Exception e) {
-                                    System.out.println(e.getMessage());
-                                }
-
-                                break;
-
-                            default:
-                                System.out.println("El fichero no es de tipo csv, json o xml");
-                                break;
-                        }
 
                     } else {
+                        File ficheroSeleccionado = new File(carpeta.getPath() + "\\" + nombrefichero);
+                        if (ficheroSeleccionado.isFile()) {
+                            System.out
+                                    .println("El fichero seleccionado es " + nombrefichero + "\nSu extensión es "
+                                            + extension);
+                            switch (extension) {
+                                case "csv":
 
-                        System.out.println("El fichero seleccionado es incorrecto");
+                                    try {
+                                        contenidoFichero = ficheroCSV.leerCSV(ficheroSeleccionado);
+                                    } catch (Exception e) {
+                                        System.out.println(e.getMessage());
+                                    }
+                                    break;
+
+                                case "json":
+                                    contenidoFichero = ficheroJson.leerJson(ficheroSeleccionado);
+                                    break;
+
+                                case "xml":
+                                    try {
+
+                                        contenidoFichero = ficheroXml.leerxml(ficheroSeleccionado);
+
+                                    } catch (Exception e) {
+                                        System.out.println(e.getMessage());
+                                    }
+
+                                    break;
+
+                                default:
+                                    System.out.println("El fichero no es de tipo csv, json o xml");
+                                    break;
+                            }
+
+                        } else {
+
+                            System.out.println("El fichero seleccionado es incorrecto");
+                        }
+
                     }
 
                     break;
@@ -102,30 +101,36 @@ public class App {
                     File ficheroSalida = null;
 
                     if (carpetaFichero.comprobarExtension(extensionSalida)) {
-                        ficheroSalida = carpetaFichero
-                                .crearFichero(
-                                        new File(carpeta.getPath() + "\\" + nombreFicheroSalida + "."
-                                                + extensionSalida));
+                        try {
+                            ficheroSalida = carpetaFichero
+                                    .crearFichero(
+                                            new File(carpeta.getPath() + "\\" + nombreFicheroSalida + "."
+                                                    + extensionSalida));
+
+                            switch (extensionSalida) {
+                                case "csv":
+                                    ficheroCSV.escribirCSV(ficheroSalida, contenidoFichero);
+                                    break;
+                                case "json":
+                                    ficheroJson.convertirAJson(contenidoFichero, ficheroSalida);
+                                    break;
+
+                                default:
+                                    System.out.println("Introduce la etiqueta raiz ");
+                                    String nodopadre = sc.nextLine();
+                                    System.out.println("Introduce la etiqueta hija ");
+                                    String nodoHijo = sc.nextLine();
+                                    ficheroXml.escribirxml(contenidoFichero, nodopadre, nodoHijo,
+                                            ficheroSalida);
+                                    break;
+                            }
+
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+
                     } else {
-                        System.out.println("Este tipo de ficheros no existe");
-                    }
-
-                    switch (extensionSalida) {
-                        case "csv":
-                            ficheroCSV.escribirCSV(ficheroSalida, contenidoFichero);
-                            break;
-                        case "json":
-                            ficheroJson.convertirAJson(contenidoFichero, ficheroSalida);
-                            break;
-
-                        default:
-                            System.out.println("Introduce la etiqeuta raiz ");
-                            String nodopadre = sc.nextLine();
-                            System.out.println("Introduce la etiqueta hija ");
-                            String nodoHijo = sc.nextLine();
-                            ficheroXml.escribirxml(contenidoFichero, nodopadre, nodoHijo,
-                                    ficheroSalida);
-                            break;
+                        System.out.println("Este tipo de fichero no existe");
                     }
 
                     break;

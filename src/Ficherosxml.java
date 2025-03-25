@@ -78,6 +78,7 @@ public class Ficherosxml {
                 }
 
                 bw.write("</" + nodoHijo + ">\n");
+                bw.write("\n");
             }
 
             bw.write("</" + nombreNodoPadre + ">\n");

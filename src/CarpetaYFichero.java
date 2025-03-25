@@ -22,7 +22,7 @@ public class CarpetaYFichero {
 
     }
 
-    public File crearFichero(File ficheroCrear) {
+    public File crearFichero(File ficheroCrear) throws Exception {
 
         // Verifica si el archivo ya existe, si no, lo crea
         if (!ficheroCrear.exists()) {
@@ -34,7 +34,7 @@ public class CarpetaYFichero {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("El fichero ya existe");
+            throw new Exception("El fichero ya existe");
         }
 
         return ficheroCrear;
