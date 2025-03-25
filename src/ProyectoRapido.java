@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @author Evelia Gil Paredes
@@ -16,6 +17,7 @@ public class ProyectoRapido {
         FicherosCSV ficheroCSV = new FicherosCSV();
         File carpeta = null;
         ArrayList<LinkedHashMap<String, String>> contenidoFichero = new ArrayList<>();
+
         while (seguir) {
             System.out.println("Introduce una opción:" + "\n1.Seleccionar Carpeta" + "\n2.Lectura de Fichero"
                     + "\n3.Conversión Fichero" + "\nCualquier otra opción te sacará del programa");
@@ -39,37 +41,39 @@ public class ProyectoRapido {
                     System.out.println("Introduce el nombre del fichero");
                     String nombrefichero = sc.nextLine();
                     String extension = nombrefichero.substring(nombrefichero.lastIndexOf(".") + 1).toLowerCase();
+
                     if (carpeta == null) {
-                        System.out.println("Introduzca una ruta de carpeta válida, opción 1");
+                        System.out.println("Introduce una carpeta válida");
                     } else {
                         File ficheroSeleccionado = new File(carpeta.getPath() + "\\" + nombrefichero);
-                        if (ficheroSeleccionado.isFile()) {
-                            System.out
-                                    .println("El fichero seleccionado es " + nombrefichero + "\nSu extensión es "
-                                            + extension);
-                            switch (extension) {
-                                case "csv":
-                                    try {
-                                        contenidoFichero = ficheroCSV.leerCSV(ficheroSeleccionado);
-                                    } catch (Exception e) {
-                                        System.out.println(e.getMessage());
-                                    }
-                                    break;
-                                case "json":
-                                    contenidoFichero = ficheroJson.leerJson(ficheroSeleccionado);
-                                    break;
+                        System.out
+                                .println("El fichero seleccionado es " + nombrefichero + "\nSu extensión es "
+                                        + extension);
+                        contenidoFichero.clear();
+                        switch (extension) {
+                            case "csv":
+                                try {
+                                    contenidoFichero = ficheroCSV.leerCSV(ficheroSeleccionado);
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
+                                break;
+                            case "json":
+                                contenidoFichero = ficheroJson.leerJson(ficheroSeleccionado);
+                                break;
 
-                                default:
-                                    try {
-                                        contenidoFichero = ficheroXml.leerxml(ficheroSeleccionado);
-                                    } catch (Exception e) {
-                                        System.out.println(e.getMessage());
-                                    }
-                                    break;
-                            }
-                        } else {
-                            System.out.println("El fichero seleccionado es incorrecto");
+                            case "xml":
+                                try {
+                                    contenidoFichero = ficheroXml.leerxml(ficheroSeleccionado);
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
+                                break;
+                            default:
+                                System.out.println("Esta extensión no existe");
+                                break;
                         }
+
                     }
                     break;
                 case 3:
@@ -78,7 +82,8 @@ public class ProyectoRapido {
                     System.out.println("Introduce el nombre del fichero");
                     String nombreFicheroSalida = sc.nextLine();
                     File ficheroSalida = null;
-                    if (carpetaFichero.comprobarExtension(extensionSalida)) {
+
+                    if (carpetaFichero.comprobarExtension(extensionSalida) && carpeta != null) {
                         try {
                             ficheroSalida = carpetaFichero
                                     .crearFichero(
@@ -105,7 +110,8 @@ public class ProyectoRapido {
                             System.out.println(e.getMessage());
                         }
                     } else {
-                        System.out.println("Este tipo de fichero no existe");
+                        System.out
+                                .println("Este tipo de fichero no existe o la carpeta está vacía, comprueba los datos");
                     }
                     break;
                 default:

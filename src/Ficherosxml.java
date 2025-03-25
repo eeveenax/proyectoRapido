@@ -14,41 +14,43 @@ public class Ficherosxml {
         LinkedHashMap<String, String> mapa = null;
         try (BufferedReader br = new BufferedReader(new FileReader(fichero))) {
             String linea;
-            String nodoHijo = "";
-            boolean segundaLinea = true;
             boolean leyendoBloque = false;
+            String nodoHijo = "";
             if ((linea = br.readLine()) == null)
-                throw new Exception("Texto vacío");
-
+                throw new Exception("El archivo está vacío");
             while ((linea = br.readLine()) != null) {
-                if (segundaLinea) {
-                    nodoHijo = linea.substring(1, linea.indexOf(">"));
-                    segundaLinea = false;
-                }
-                if (linea.contains("<" + nodoHijo + ">")) {
-                    mapa = new LinkedHashMap<>();
-                    leyendoBloque = true;
-                } else if (linea.contains("</" + nodoHijo + ">")) {
-                    if (mapa != null) {
-                        contenidoxml.add(mapa);
-                    }
-                    leyendoBloque = false;
-                }
-                if (leyendoBloque && linea.contains("<") && linea.contains(">")) {
-                    int iniClave = linea.indexOf("<") + 1;
-                    int finClave = linea.indexOf(">");
-                    int iniValor = finClave + 1;
-                    int finValor = linea.lastIndexOf("<");
-                    if (iniClave < finClave && iniValor < finValor) {
-                        String clave = linea.substring(iniClave, finClave);
-                        String valor = linea.substring(iniValor, finValor);
-                        mapa.put(clave, valor);
+                linea = linea.trim();
+
+                if (linea.startsWith("<") && linea.endsWith(">")) {
+                    String etiqueta = linea.substring(1, linea.length() - 1);
+
+                    if (!leyendoBloque && !etiqueta.startsWith("/")) {
+                        nodoHijo = etiqueta;
+                        mapa = new LinkedHashMap<>();
+                        leyendoBloque = true;
+                    } else if (leyendoBloque && etiqueta.equals("/" + nodoHijo)) {
+                        if (mapa != null) {
+                            contenidoxml.add(mapa);
+                        }
+                        leyendoBloque = false;
+                    } else if (leyendoBloque && !etiqueta.startsWith("/")) {
+                        int iniClave = linea.indexOf("<") + 1;
+                        int finClave = linea.indexOf(">");
+                        int iniValor = finClave + 1;
+                        int finValor = linea.lastIndexOf("<");
+
+                        if (iniClave < finClave && iniValor < finValor) {
+                            String clave = linea.substring(iniClave, finClave);
+                            String valor = linea.substring(iniValor, finValor);
+                            mapa.put(clave, valor);
+                        }
                     }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return contenidoxml;
     }
 
