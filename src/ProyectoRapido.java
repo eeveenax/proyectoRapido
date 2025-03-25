@@ -36,12 +36,12 @@ public class ProyectoRapido {
                     }
                     break;
                 case 2:
-                    System.out.println("Introduce el nombre del fichero");
-                    String nombrefichero = sc.nextLine();
-                    String extension = nombrefichero.substring(nombrefichero.lastIndexOf(".") + 1).toLowerCase();
                     if (carpeta == null)
                         System.out.println("Introduzca una ruta de carpeta válida, opción 1");
                     else {
+                        System.out.println("Introduce el nombre del fichero");
+                        String nombrefichero = sc.nextLine();
+                        String extension = nombrefichero.substring(nombrefichero.lastIndexOf(".") + 1).toLowerCase();
                         File ficheroSeleccionado = new File(carpeta.getPath() + "\\" + nombrefichero);
                         if (ficheroSeleccionado.isFile()) {
                             System.out
