@@ -2,7 +2,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-public class Conversion  {
+public class conversion {
 
     public void convertirACSV(ArrayList<LinkedHashMap<String, String>> datos, String nombreFichero) {
         try (FileWriter writer = new FileWriter(nombreFichero)) {
@@ -20,12 +20,10 @@ public class Conversion  {
             }
         } catch (IOException e) {
             System.err.println("Error al convertir a CSV: " + e.getMessage());
-            }
         }
-
-
-        //Aquí tenemos que hacer el de json
-
-
-        //Aquí tenemos que hacer el metodo de xml
     }
+
+    // Aquí tenemos que hacer el de json
+
+    // Aquí tenemos que hacer el metodo de xml
+}
