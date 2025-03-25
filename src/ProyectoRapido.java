@@ -75,15 +75,14 @@ public class ProyectoRapido {
                     }
                     break;
                 case 3:
-                    System.out.println("Introduce el tipo de Extensión");
-                    String extensionSalida = sc.nextLine().toLowerCase();
-                    System.out.println("Introduce el nombre del fichero");
-                    String nombreFicheroSalida = sc.nextLine();
-                    File ficheroSalida = null;
-
                     if (carpeta == null)
                         System.out.println("Introduzca una ruta de carpeta válida, opción 1");
                     else {
+                        System.out.println("Introduce el tipo de Extensión");
+                        String extensionSalida = sc.nextLine().toLowerCase();
+                        System.out.println("Introduce el nombre del fichero");
+                        String nombreFicheroSalida = sc.nextLine();
+                        File ficheroSalida = null;
 
                         if (carpetaFichero.comprobarExtension(extensionSalida)) {
 
