@@ -1,8 +1,11 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.Map.Entry;
 
 public class FicherosJson {
 
@@ -54,6 +57,52 @@ public class FicherosJson {
         }
 
         return contenidoJson;
+
+    }
+
+    public void convertirAJson(ArrayList<LinkedHashMap<String, String>> contenido, File ficheroSalida) {
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(ficheroSalida))) {
+
+            int numelemtnosArrayL = contenido.size();
+            int contadorArray = 0;
+            bw.write("[" + "\n");
+
+            for (int i = 0; i < contenido.size(); i++) {
+
+                LinkedHashMap<String, String> bloqueTexto = contenido.get(i);
+
+                int numEntradas = bloqueTexto.size();
+                int contador = 0;
+
+                bw.write("{" + "\n");
+
+                for (Entry<String, String> entry : bloqueTexto.entrySet()) {
+
+                    if (contador >= numEntradas - 1)
+                        bw.write("\"" + entry.getKey() + "\": \"" + entry.getValue() + "\"\n");
+
+                    else
+                        bw.write("\"" + entry.getKey() + "\": \"" + entry.getValue() + "\",\n");
+
+                    contador++;
+
+                }
+
+                if (contadorArray >= numelemtnosArrayL - 1)
+                    bw.write("}" + "\n");
+
+                else
+                    bw.write("}," + "\n");
+
+                contadorArray++;
+            }
+
+            bw.write("]" + "\n");
+
+        } catch (IOException e) {
+            System.err.println("Error al escribir " + e.getMessage());
+        }
 
     }
 
