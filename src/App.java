@@ -10,7 +10,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         boolean seguir = true;
-        SeleccionCarpeta seleccionCarpeta = new SeleccionCarpeta();
+        CarpetaYFichero carpetaFichero = new CarpetaYFichero();
         FicherosJson ficheroJson = new FicherosJson();
         Ficherosxml ficheroXml = new Ficherosxml();
 
@@ -27,11 +27,11 @@ public class App {
                     String ruta = sc.nextLine();
 
                     try {
-                        carpeta = seleccionCarpeta.seleccionCarpeta(new File(ruta));
+                        carpeta = carpetaFichero.seleccionCarpeta(new File(ruta));
                         System.out.println("Ruta: " + carpeta.getPath());
                         System.out.println(" ");
                         System.out.println("Contenido de la Carpeta ");
-                        seleccionCarpeta.verContenidoCarpeta(carpeta);
+                        carpetaFichero.verContenidoCarpeta(carpeta);
                         System.out.println(" ");
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -88,6 +88,29 @@ public class App {
 
                 case 3:
 
+                    System.out.println("Introduce el tipo de Extensión");
+                    String extensionSalida = sc.nextLine().toLowerCase();
+                    System.out.println("Introduce el nombre del fichero");
+                    String nombreFicheroSalida = sc.nextLine();
+                    File ficheroSalida = carpetaFichero
+                            .crearFichero(
+                                    new File(carpeta.getPath() + "\\" + nombreFicheroSalida + "." + extensionSalida));
+
+                    switch (extensionSalida) {
+                        case "csv":
+
+                            break;
+                        case "json":
+                            ficheroJson.convertirAJson(contenidoFichero, ficheroSalida);
+                            break;
+                        case "xml":
+
+                            break;
+
+                        default:
+                            break;
+                    }
+
                     break;
 
                 default:
@@ -101,5 +124,9 @@ public class App {
 }
 
 /*
- * o Fichero seleccionado.
+ * 
+ * o Conversión a: Finalmente, exportará la
+ * información contenida en las estructuras de datos mencionadas en el apartado
+ * anterior en el formato seleccionado. Esta opción solo se permitirá tras haber
+ * seleccionado un fichero.
  */
