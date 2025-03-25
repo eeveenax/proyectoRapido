@@ -57,7 +57,9 @@ public class App {
                                         + extension);
                         switch (extension) {
                             case "csv":
-                                break;
+                            FicherosCSV ficheroCSV = new FicherosCSV();
+                            contenidoFichero = ficheroCSV.leerCSV(ficheroSeleccionado);
+                            break;
 
                             case "json":
 
@@ -88,7 +90,7 @@ public class App {
                     break;
 
                 case 3:
-
+        
                     break;
 
                 default:
