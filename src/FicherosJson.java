@@ -2,8 +2,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.*;
 
 public class FicherosJson {
@@ -12,8 +10,6 @@ public class FicherosJson {
 
         ArrayList<LinkedHashMap<String, String>> contenidoJson = new ArrayList<>();
 
-        // try-with-resources: BufferedReader se cierra automáticamente al finalizar el
-        // bloque try
         try (BufferedReader br = new BufferedReader(new FileReader(fichero))) {
 
             StringBuilder sb = new StringBuilder();
