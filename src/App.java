@@ -58,6 +58,12 @@ public class App {
                                         + extension);
                         switch (extension) {
                             case "csv":
+
+                                try {
+                                    contenidoFichero = ficheroCSV.leerCSV(ficheroSeleccionado);
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
                                 break;
 
                             case "json":
