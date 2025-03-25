@@ -19,6 +19,7 @@ public class Ficherosxml {
             boolean leyendoBloque = false;
             if ((linea = br.readLine()) == null)
                 throw new Exception("Texto vacío");
+
             while ((linea = br.readLine()) != null) {
                 if (segundaLinea) {
                     nodoHijo = linea.substring(1, linea.indexOf(">"));
@@ -61,7 +62,6 @@ public class Ficherosxml {
                     bw.write("<" + entrada.getKey() + ">" + entrada.getValue() + "</" + entrada.getKey() + ">\n");
                 }
                 bw.write("</" + nodoHijo + ">\n");
-                bw.write("\n");
             }
             bw.write("</" + nombreNodoPadre + ">\n");
         } catch (IOException e) {

@@ -16,6 +16,7 @@ public class FicherosCSV {
             String linea;
             if ((linea = br.readLine()) == null)
                 throw new Exception("Texto vacío");
+
             String[] encabezado = linea.split(",");
             for (String encabezadoActual : encabezado) {
                 encabezados.add(encabezadoActual);
