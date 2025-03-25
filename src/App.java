@@ -113,9 +113,9 @@ public class App {
                             break;
 
                         default:
-                            System.out.println("Introduce el nodo padre ");
+                            System.out.println("Introduce la etiqeuta raiz ");
                             String nodopadre = sc.nextLine();
-                            System.out.println("Introduce el nodo hijo ");
+                            System.out.println("Introduce la etiqueta hija ");
                             String nodoHijo = sc.nextLine();
                             ficheroXml.escribirxml(contenidoFichero, nodopadre, nodoHijo,
                                     ficheroSalida);
