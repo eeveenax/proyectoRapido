@@ -49,7 +49,6 @@ public class ProyectoRapido {
                         System.out
                                 .println("El fichero seleccionado es " + nombrefichero + "\nSu extensión es "
                                         + extension);
-                        contenidoFichero.clear();
                         switch (extension) {
                             case "csv":
                                 try {
