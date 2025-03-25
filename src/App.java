@@ -13,6 +13,7 @@ public class App {
         CarpetaYFichero carpetaFichero = new CarpetaYFichero();
         FicherosJson ficheroJson = new FicherosJson();
         Ficherosxml ficheroXml = new Ficherosxml();
+        FicherosCSV ficheroCSV = new FicherosCSV();
 
         File carpeta = null;
         ArrayList<LinkedHashMap<String, String>> contenidoFichero = new ArrayList<>();
