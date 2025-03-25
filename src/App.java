@@ -13,6 +13,7 @@ public class App {
         SeleccionCarpeta seleccionCarpeta = new SeleccionCarpeta();
         FicherosJson ficheroJson = new FicherosJson();
         Ficherosxml ficheroXml = new Ficherosxml();
+        FicherosCSV ficheroCSV = new FicherosCSV();
 
         File carpeta = null;
         ArrayList<LinkedHashMap<String, String>> contenidoFichero = new ArrayList<>();
@@ -57,9 +58,10 @@ public class App {
                                         + extension);
                         switch (extension) {
                             case "csv":
-                            FicherosCSV ficheroCSV = new FicherosCSV();
-                            contenidoFichero = ficheroCSV.leerCSV(ficheroSeleccionado);
-                            break;
+
+                                contenidoFichero = ficheroCSV.leerCSV(ficheroSeleccionado);
+
+                                break;
 
                             case "json":
 
@@ -90,7 +92,7 @@ public class App {
                     break;
 
                 case 3:
-        
+
                     break;
 
                 default:
