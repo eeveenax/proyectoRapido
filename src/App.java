@@ -15,7 +15,6 @@ public class App {
         Ficherosxml ficheroXml = new Ficherosxml();
         FicherosCSV ficheroCSV = new FicherosCSV();
         File carpeta = null;
-
         ArrayList<LinkedHashMap<String, String>> contenidoFichero = new ArrayList<>();
         while (seguir) {
             System.out.println("Introduce una opción:" + "\n1.Seleccionar Carpeta" + "\n2.Lectura de Fichero"
@@ -25,7 +24,6 @@ public class App {
                 case 1:
                     System.out.println("Escribe la ruta de la carpeta");
                     String ruta = sc.nextLine();
-
                     try {
                         carpeta = carpetaFichero.seleccionCarpeta(new File(ruta));
                         System.out.println("Ruta: " + carpeta.getPath());
@@ -36,17 +34,13 @@ public class App {
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
-
                     break;
-
                 case 2:
                     System.out.println("Introduce el nombre del fichero");
                     String nombrefichero = sc.nextLine();
                     String extension = nombrefichero.substring(nombrefichero.lastIndexOf(".") + 1).toLowerCase();
-
                     if (carpeta == null) {
                         System.out.println("Introduzca una ruta de carpeta válida, opción 1");
-
                     } else {
                         File ficheroSeleccionado = new File(carpeta.getPath() + "\\" + nombrefichero);
                         if (ficheroSeleccionado.isFile()) {
@@ -55,58 +49,45 @@ public class App {
                                             + extension);
                             switch (extension) {
                                 case "csv":
-
                                     try {
                                         contenidoFichero = ficheroCSV.leerCSV(ficheroSeleccionado);
                                     } catch (Exception e) {
                                         System.out.println(e.getMessage());
                                     }
                                     break;
-
                                 case "json":
                                     contenidoFichero = ficheroJson.leerJson(ficheroSeleccionado);
                                     break;
-
                                 case "xml":
                                     try {
-
                                         contenidoFichero = ficheroXml.leerxml(ficheroSeleccionado);
-
                                     } catch (Exception e) {
                                         System.out.println(e.getMessage());
                                     }
-
                                     break;
-
                                 default:
                                     System.out.println("El fichero no es de tipo csv, json o xml");
                                     break;
                             }
-
                         } else {
-
                             System.out.println("El fichero seleccionado es incorrecto");
                         }
-
                     }
 
                     break;
 
                 case 3:
-
                     System.out.println("Introduce el tipo de Extensión");
                     String extensionSalida = sc.nextLine().toLowerCase();
                     System.out.println("Introduce el nombre del fichero");
                     String nombreFicheroSalida = sc.nextLine();
                     File ficheroSalida = null;
-
                     if (carpetaFichero.comprobarExtension(extensionSalida)) {
                         try {
                             ficheroSalida = carpetaFichero
                                     .crearFichero(
                                             new File(carpeta.getPath() + "\\" + nombreFicheroSalida + "."
                                                     + extensionSalida));
-
                             switch (extensionSalida) {
                                 case "csv":
                                     ficheroCSV.escribirCSV(ficheroSalida, contenidoFichero);
@@ -124,17 +105,13 @@ public class App {
                                             ficheroSalida);
                                     break;
                             }
-
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
-
                     } else {
                         System.out.println("Este tipo de fichero no existe");
                     }
-
                     break;
-
                 default:
                     seguir = false;
                     break;
