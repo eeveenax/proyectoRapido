@@ -59,8 +59,6 @@ public class App {
                                         + extension);
                         switch (extension) {
                             case "csv":
-                                FicherosCSV ficheroCSV = new FicherosCSV();
-                                // contenidoFichero = ficheroCSV.leerCSV(ficheroSeleccionado);
                                 break;
 
                             case "json":
