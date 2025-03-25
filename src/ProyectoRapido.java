@@ -83,11 +83,8 @@ public class ProyectoRapido {
                         System.out.println("Introduce el nombre del fichero");
                         String nombreFicheroSalida = sc.nextLine();
                         File ficheroSalida = null;
-
                         if (carpetaFichero.comprobarExtension(extensionSalida)) {
-
                             try {
-
                                 ficheroSalida = carpetaFichero
                                         .crearFichero(
                                                 new File(carpeta.getPath() + "\\" + nombreFicheroSalida + "."
@@ -112,13 +109,9 @@ public class ProyectoRapido {
                             } catch (Exception e) {
                                 System.out.println(e.getMessage());
                             }
-
-                        } else {
+                        } else
                             System.out.println("Este tipo de fichero no existe");
-                        }
-
                     }
-
                     break;
                 default:
                     seguir = false;
