@@ -38,12 +38,6 @@ public class FicherosCSV {
             e.printStackTrace();
         }
 
-        for (LinkedHashMap<String, String> fila : contenidoCSV) {
-            for (Entry<String, String> dato : fila.entrySet()) {
-                System.out.println(dato.getKey() + " : " + dato.getValue());
-            }
-        }
-
         return contenidoCSV;
     }
 }
