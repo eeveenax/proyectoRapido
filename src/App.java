@@ -73,9 +73,7 @@ public class App {
                             System.out.println("El fichero seleccionado es incorrecto");
                         }
                     }
-
                     break;
-
                 case 3:
                     System.out.println("Introduce el tipo de Extensión");
                     String extensionSalida = sc.nextLine().toLowerCase();
@@ -117,7 +115,6 @@ public class App {
                     break;
             }
         }
-
         sc.close();
     }
 }
