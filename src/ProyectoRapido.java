@@ -38,13 +38,14 @@ public class ProyectoRapido {
                     }
                     break;
                 case 2:
-                    System.out.println("Introduce el nombre del fichero");
-                    String nombrefichero = sc.nextLine();
-                    String extension = nombrefichero.substring(nombrefichero.lastIndexOf(".") + 1).toLowerCase();
 
                     if (carpeta == null) {
                         System.out.println("Introduce una carpeta válida");
                     } else {
+                        System.out.println("Introduce el nombre del fichero");
+                        String nombrefichero = sc.nextLine();
+                        String extension = nombrefichero.substring(nombrefichero.lastIndexOf(".") + 1).toLowerCase();
+
                         File ficheroSeleccionado = new File(carpeta.getPath() + "\\" + nombrefichero);
                         System.out
                                 .println("El fichero seleccionado es " + nombrefichero + "\nSu extensión es "
@@ -76,42 +77,52 @@ public class ProyectoRapido {
                     }
                     break;
                 case 3:
-                    System.out.println("Introduce el tipo de Extensión");
-                    String extensionSalida = sc.nextLine().toLowerCase();
-                    System.out.println("Introduce el nombre del fichero");
-                    String nombreFicheroSalida = sc.nextLine();
-                    File ficheroSalida = null;
 
-                    if (carpetaFichero.comprobarExtension(extensionSalida) && carpeta != null) {
-                        try {
-                            ficheroSalida = carpetaFichero
-                                    .crearFichero(
-                                            new File(carpeta.getPath() + "\\" + nombreFicheroSalida + "."
-                                                    + extensionSalida));
-                            switch (extensionSalida) {
-                                case "csv":
-                                    ficheroCSV.escribirCSV(ficheroSalida, contenidoFichero);
-                                    break;
-                                case "json":
-                                    ficheroJson.convertirAJson(contenidoFichero, ficheroSalida);
-                                    break;
+                    if (carpeta == null) {
+                        System.out.println("Introduce una carpeta válida");
 
-                                default:
-                                    System.out.println("Introduce la etiqueta raiz ");
-                                    String nodopadre = sc.nextLine();
-                                    System.out.println("Introduce la etiqueta hija ");
-                                    String nodoHijo = sc.nextLine();
-                                    ficheroXml.escribirxml(contenidoFichero, nodopadre, nodoHijo,
-                                            ficheroSalida);
-                                    break;
-                            }
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
                     } else {
-                        System.out
-                                .println("Este tipo de fichero no existe o la carpeta está vacía, comprueba los datos");
+
+                        System.out.println("Introduce el tipo de Extensión");
+                        String extensionSalida = sc.nextLine().toLowerCase();
+                        System.out.println("Introduce el nombre del fichero");
+                        String nombreFicheroSalida = sc.nextLine();
+                        File ficheroSalida = null;
+
+                        if (carpetaFichero.comprobarExtension(extensionSalida)) {
+                            try {
+                                ficheroSalida = carpetaFichero
+                                        .crearFichero(
+                                                new File(carpeta.getPath() + "\\" + nombreFicheroSalida + "."
+                                                        + extensionSalida));
+                                switch (extensionSalida) {
+                                    case "csv":
+                                        ficheroCSV.escribirCSV(ficheroSalida, contenidoFichero);
+                                        break;
+                                    case "json":
+                                        ficheroJson.convertirAJson(contenidoFichero, ficheroSalida);
+                                        break;
+
+                                    default:
+                                        System.out.println("Introduce la etiqueta raiz ");
+                                        String nodopadre = sc.nextLine();
+                                        System.out.println("Introduce la etiqueta hija ");
+                                        String nodoHijo = sc.nextLine();
+                                        ficheroXml.escribirxml(contenidoFichero, nodopadre, nodoHijo,
+                                                ficheroSalida);
+                                        break;
+                                }
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                            }
+                        } else {
+                            System.out
+                                    .println(
+                                            "Este tipo de fichero no existe o la carpeta está vacía, comprueba los datos");
+                        }
+
                     }
+
                     break;
                 default:
                     seguir = false;
