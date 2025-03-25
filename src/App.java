@@ -60,7 +60,6 @@ public class App {
                                 break;
 
                             case "json":
-
                                 contenidoFichero = ficheroJson.leerJson(ficheroSeleccionado);
                                 break;
 
