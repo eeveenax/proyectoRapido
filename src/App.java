@@ -112,7 +112,7 @@ public class App {
 
                     switch (extensionSalida) {
                         case "csv":
-
+                            ficheroCSV.escribirCSV(ficheroSalida, contenidoFichero);
                             break;
                         case "json":
                             ficheroJson.convertirAJson(contenidoFichero, ficheroSalida);
