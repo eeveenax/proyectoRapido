@@ -12,8 +12,6 @@ public class FicherosJson {
 
         ArrayList<LinkedHashMap<String, String>> contenidoJson = new ArrayList<>();
 
-        // try-with-resources: BufferedReader se cierra automáticamente al finalizar el
-        // bloque try
         try (BufferedReader br = new BufferedReader(new FileReader(fichero))) {
 
             StringBuilder sb = new StringBuilder();
