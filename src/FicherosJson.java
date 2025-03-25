@@ -47,15 +47,6 @@ public class FicherosJson {
             System.err.println("Error: " + e.getMessage());
         }
 
-        for (HashMap<String, String> mapa : contenidoJson) {
-
-            for (Map.Entry<String, String> entry : mapa.entrySet()) {
-                System.out.println(entry.getKey() + " : " + entry.getValue());
-            }
-            System.out.println(" ");
-
-        }
-
         return contenidoJson;
 
     }
