@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.*;
 
-public class LecturaJson {
+public class FicherosJson {
 
-    public ArrayList<HashMap<String, String>> leerJson(File fichero) {
+    public ArrayList<LinkedHashMap<String, String>> leerJson(File fichero) {
 
-        ArrayList<HashMap<String, String>> contenidoJson = new ArrayList<>();
+        ArrayList<LinkedHashMap<String, String>> contenidoJson = new ArrayList<>();
 
         // try-with-resources: BufferedReader se cierra automáticamente al finalizar el
         // bloque try
@@ -33,7 +33,7 @@ public class LecturaJson {
             for (String jsonelemento : jsonBloqueTexto) {
                 jsonelemento = jsonelemento.replace("{", "").replace("}", "");
                 String[] claveValor = jsonelemento.split(",");
-                HashMap<String, String> mapa = new HashMap<>();
+                LinkedHashMap<String, String> mapa = new LinkedHashMap<>();
                 for (String pair : claveValor) {
                     String[] entrada = pair.split(":");
                     String calve = entrada[0].trim().replace("\"", "");
@@ -46,6 +46,15 @@ public class LecturaJson {
 
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
+        }
+
+        for (HashMap<String, String> mapa : contenidoJson) {
+
+            for (Map.Entry<String, String> entry : mapa.entrySet()) {
+                System.out.println(entry.getKey() + " : " + entry.getValue());
+            }
+            System.out.println(" ");
+
         }
 
         return contenidoJson;
