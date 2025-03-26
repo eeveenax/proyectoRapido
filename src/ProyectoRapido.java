@@ -79,43 +79,50 @@ public class ProyectoRapido {
                         System.out.println("Introduce una carpeta válida");
 
                     } else {
-                        System.out.println("Introduce el tipo de Extensión");
-                        String extensionSalida = sc.nextLine().toLowerCase();
-                        System.out.println("Introduce el nombre del fichero");
-                        String nombreFicheroSalida = sc.nextLine();
-                        File ficheroSalida = null;
-                        if (carpetaFichero.comprobarExtension(extensionSalida)) {
-                            try {
-                                ficheroSalida = carpetaFichero
-                                        .crearFichero(
-                                                new File(carpeta.getPath() + "\\" + nombreFicheroSalida + "."
-                                                        + extensionSalida));
 
-                                switch (extensionSalida) {
-                                    case "csv":
-                                        ficheroCSV.escribirCSV(ficheroSalida, contenidoFichero);
-                                        break;
-                                    case "json":
-                                        ficheroJson.convertirAJson(contenidoFichero, ficheroSalida);
-                                        break;
+                        if (!contenidoFichero.isEmpty()) {
 
-                                    default:
-                                        System.out.println("Introduce la etiqueta raiz ");
-                                        String nodopadre = sc.nextLine();
-                                        System.out.println("Introduce la etiqueta hija ");
-                                        String nodoHijo = sc.nextLine();
-                                        ficheroXml.escribirxml(contenidoFichero, nodopadre, nodoHijo,
-                                                ficheroSalida);
-                                        break;
+                            System.out.println("Introduce el tipo de Extensión");
+                            String extensionSalida = sc.nextLine().toLowerCase();
+                            System.out.println("Introduce el nombre del fichero");
+                            String nombreFicheroSalida = sc.nextLine();
+                            File ficheroSalida = null;
+                            if (carpetaFichero.comprobarExtension(extensionSalida)) {
+                                try {
+                                    ficheroSalida = carpetaFichero
+                                            .crearFichero(
+                                                    new File(carpeta.getPath() + "\\" + nombreFicheroSalida + "."
+                                                            + extensionSalida));
+
+                                    switch (extensionSalida) {
+                                        case "csv":
+                                            ficheroCSV.escribirCSV(ficheroSalida, contenidoFichero);
+                                            break;
+                                        case "json":
+                                            ficheroJson.convertirAJson(contenidoFichero, ficheroSalida);
+                                            break;
+
+                                        default:
+                                            System.out.println("Introduce la etiqueta raiz ");
+                                            String nodopadre = sc.nextLine();
+                                            System.out.println("Introduce la etiqueta hija ");
+                                            String nodoHijo = sc.nextLine();
+                                            ficheroXml.escribirxml(contenidoFichero, nodopadre, nodoHijo,
+                                                    ficheroSalida);
+                                            break;
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
                                 }
-                            } catch (Exception e) {
-                                System.out.println(e.getMessage());
+                            } else {
+                                System.out
+                                        .println(
+                                                "Este tipo de fichero no existe, comprueba los datos");
                             }
-                        } else {
-                            System.out
-                                    .println(
-                                            "Este tipo de fichero no existe, comprueba los datos");
-                        }
+
+                        } else
+                            System.out.println("Contenido a convertir vacío");
+
                     }
                     break;
                 default:

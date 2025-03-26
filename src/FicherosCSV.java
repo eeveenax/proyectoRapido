@@ -41,13 +41,28 @@ public class FicherosCSV {
             for (Entry<String, String> entrada : primerElemento.entrySet()) {
                 encabezados.add(entrada.getKey());
             }
+            int tamEncabezados = encabezados.size();
+            int contadorEncabezados = 0;
+
             for (String encabezado : encabezados) {
-                bw.write(encabezado + ",");
+                if (contadorEncabezados >= tamEncabezados - 1)
+                    bw.write(encabezado);
+                else
+                    bw.write(encabezado + ",");
+                contadorEncabezados++;
             }
             bw.write("\n");
+
             for (LinkedHashMap<String, String> elementos : contenidoCSV) {
+                int tamLista = contenidoCSV.get(0).size();
+                int contadorLista = 0;
                 for (Entry<String, String> entrada : elementos.entrySet()) {
-                    bw.write(entrada.getValue() + ",");
+
+                    if (contadorLista < tamLista - 1)
+                        bw.write(entrada.getValue() + ",");
+                    else
+                        bw.write(entrada.getValue());
+                    contadorLista++;
                 }
                 bw.write("\n");
             }
