@@ -8,7 +8,6 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class FicherosCSV {
-
     public ArrayList<LinkedHashMap<String, String>> leerCSV(File ficheroEntrada) throws Exception {
         ArrayList<LinkedHashMap<String, String>> contenidoCSV = new ArrayList<>();
         ArrayList<String> encabezados = new ArrayList<>();
@@ -32,7 +31,6 @@ public class FicherosCSV {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return contenidoCSV;
     }
 

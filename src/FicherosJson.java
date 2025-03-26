@@ -8,7 +8,6 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class FicherosJson {
-
     public ArrayList<LinkedHashMap<String, String>> leerJson(File fichero) {
         ArrayList<LinkedHashMap<String, String>> contenidoJson = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(fichero))) {

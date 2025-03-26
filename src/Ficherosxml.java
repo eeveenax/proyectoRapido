@@ -8,7 +8,6 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class Ficherosxml {
-
     public ArrayList<LinkedHashMap<String, String>> leerxml(File fichero) throws Exception {
         ArrayList<LinkedHashMap<String, String>> contenidoxml = new ArrayList<>();
         LinkedHashMap<String, String> mapa = null;
@@ -20,10 +19,8 @@ public class Ficherosxml {
                 throw new Exception("El archivo está vacío");
             while ((linea = br.readLine()) != null) {
                 linea = linea.trim();
-
                 if (linea.startsWith("<") && linea.endsWith(">")) {
                     String etiqueta = linea.substring(1, linea.length() - 1);
-
                     if (!leyendoBloque && !etiqueta.startsWith("/")) {
                         nodoHijo = etiqueta;
                         mapa = new LinkedHashMap<>();
@@ -50,7 +47,6 @@ public class Ficherosxml {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return contenidoxml;
     }
 

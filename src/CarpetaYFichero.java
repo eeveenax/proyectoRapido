@@ -18,11 +18,9 @@ public class CarpetaYFichero {
     }
 
     public File crearFichero(File ficheroCrear) throws Exception {
-        // Verifica si el archivo ya existe, si no, lo crea
         if (!ficheroCrear.exists()) {
             try {
                 ficheroCrear.createNewFile();
-
                 System.out.println("Fichero creado en " + ficheroCrear.getPath());
             } catch (IOException e) {
                 e.printStackTrace();
